@@ -324,7 +324,20 @@ prodprice.setText(jTable2.getValueAt(row, 3).toString());        // TODO add you
     }//GEN-LAST:event_textfieldActionPerformed
 
     private void textfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textfieldKeyReleased
-
+try {DefaultTableModel tab = (DefaultTableModel) jTable2.getModel(); tab.setRowCount(0);
+        Class.forName(forname);
+      PreparedStatement ps = DriverManager.getConnection(driver, us, ps1).prepareStatement("select * from producttbl where product like? ");
+       ps.setString(1, "%"+textfield.getText()+"%");
+      ResultSet rs = (ResultSet) ps.executeQuery();
+      
+       while (rs.next()){
+           tab.addRow(new Object[]{rs.getString("id"),rs.getString("product"),rs.getString("quantity"),rs.getString("price")});
+       }
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(homepage.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (SQLException ex) {
+        Logger.getLogger(homepage.class.getName()).log(Level.SEVERE, null, ex);
+    }  
     }//GEN-LAST:event_textfieldKeyReleased
 
     /**
