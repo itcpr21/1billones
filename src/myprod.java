@@ -54,4 +54,22 @@ public class myprod {
            Logger.getLogger(myprod.class.getName()).log(Level.SEVERE, null, ex);
        }
        }
+       
+       
+       public void edit(int id, String product, String price){
+       try {
+           Class.forName(forname);
+           PreparedStatement ps = DriverManager.getConnection(driver,us,ps1).prepareStatement("update producttbl set product = ?, price = ? where id = ?");
+           ps.setString(1, product);
+           ps.setString(2, price);
+           ps.setInt(3, id);
+           ps.executeUpdate();
+       } catch (ClassNotFoundException ex) {
+           Logger.getLogger(myprod.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (SQLException ex) {
+           Logger.getLogger(myprod.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       }
+       
+       
 }
